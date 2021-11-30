@@ -22,32 +22,32 @@ function s = secanteModificada(x0,d,f,Es,maxiter)
     
     disp("El valor de x0 es: "),disp(x0);
     disp("El valor de delta es: "),disp(d);
-    disp("Delta por X0 es: "),disp(d*x0);
+    disp("Delta*x0: "),disp(d*x0);
     disp("(Delta*x0)+(x0) = " ),disp((d*x0)+x0);
     disp("El valor de la funcion en x0 es: "),disp(f(x0));
-    disp("El valor de la funcion en x0 es: "),disp(f(d*x0)+x0));
+    disp("El valor de la funcion en f((d*x0)+x0) es: "),disp(f((d*x0)+x0));
     disp("El valor del siguiente punto xi sera: "),disp(xi);
 
-    
-    
-    
-    xi = x1 - ( (f(x1)*(x0-x1))/(f(x0)-f(x1)) );
-    
+    xi = (x0) - ( (d*x0*f(x0))/(f(x0+(d*x0))-f(x0)) );
+    disp("El valor siguiente xi es: "),disp(xi);
     
     if xi == 0
       break;
     endif
     
-    Ea = abs( (x1-x0)/(x1) )*100;
-    disp("El error aproximado es: "), disp(Ea);
+    if maxiter>=1
+      Ea = abs( (xi-xaux)/(xi) )*100;
+      disp("El error aproximado es: "), disp(Ea);
+    endif
+    
         
     if Ea<=Es
       i=maxiter+1;
       disp("Llego al error tolerado");
      else
       i = i+1;
-      x0=x1;
-      x1=xi
+      xaux=x0;
+      x0=xi;
     endif
   endwhile
   
